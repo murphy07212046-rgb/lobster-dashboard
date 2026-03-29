@@ -46,9 +46,9 @@ app.get('/', (req, res) => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding-top: 8px;
-      gap: 4px;
+      justify-content: space-between;
+      padding: 20px 0;
+      gap: 16px;
     }
     .header {
       text-align: center;
@@ -82,7 +82,7 @@ app.get('/', (req, res) => {
       backdrop-filter: blur(20px);
       border: 1px solid rgba(148, 163, 184, 0.15);
       border-radius: 16px;
-      padding: 12px 20px;
+      padding: 24px 32px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -118,10 +118,7 @@ app.get('/', (req, res) => {
     .main-card .name {
       font-size: 22px;
       font-weight: 700;
-      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #f87171;
       margin-bottom: 2px;
     }
     .main-card .role {
@@ -145,7 +142,7 @@ app.get('/', (req, res) => {
       background: rgba(15, 23, 42, 0.5);
       border: 1px solid rgba(148, 163, 184, 0.1);
       border-radius: 12px;
-      padding: 10px 8px;
+      padding: 16px 12px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -174,7 +171,7 @@ app.get('/', (req, res) => {
     .sub-card .name {
       font-size: 14px;
       font-weight: 600;
-      color: #e2e8f0;
+      color: #f87171;
       margin-bottom: 3px;
     }
     .sub-card .desc {
@@ -196,7 +193,7 @@ app.get('/', (req, res) => {
       backdrop-filter: blur(20px);
       border: 1px solid rgba(148, 163, 184, 0.1);
       border-radius: 14px;
-      padding: 10px 8px;
+      padding: 20px 16px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -229,7 +226,7 @@ app.get('/', (req, res) => {
     .team-card .name {
       font-size: 16px;
       font-weight: 600;
-      color: #e2e8f0;
+      color: #f87171;
       margin-bottom: 2px;
     }
     .team-card .role {
@@ -286,7 +283,7 @@ app.get('/', (req, res) => {
 <body>
   <div class="container">
     <div class="header">
-      <h1>🏢 梅式指挥中心</h1>
+      <h1>🏢 梅式龙虾集团</h1>
       <p>8只专业龙虾，一套完整的产品研发体系</p>
       <p class="hint">点击卡片复制召唤指令</p>
     </div>

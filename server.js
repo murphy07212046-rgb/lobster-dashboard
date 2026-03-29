@@ -296,9 +296,9 @@ app.get('/', (req, res) => {
       <p class="hint">点击卡片复制召唤指令</p>
     </div>
 
-    <div class="main-card" onclick="copyText('@产品梅')">
+    <div class="main-card" onclick="copyText('@产品小梅')">
       <div class="icon-wrapper">${icons.pm}</div>
-      <div class="alias">@产品梅</div>
+      <div class="alias">@产品小梅 @PM @产品</div>
       <div class="name">产品小梅</div>
       <div class="role">产品经理</div>
       <div class="desc">需求分析、统筹产品方案</div>
@@ -325,30 +325,30 @@ app.get('/', (req, res) => {
     </div>
 
     <div class="team-grid">
-      <div class="team-card" onclick="copyText('@管理梅')">
+      <div class="team-card" onclick="copyText('@管理小梅')">
         <div class="icon-wrapper" style="background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.2);">${icons.rm}</div>
-        <div class="alias">@管理梅</div>
+        <div class="alias">@管理小梅 @RM @需求</div>
         <div class="name">管理小梅</div>
         <div class="role">需求管理员</div>
         <div class="desc">汇总需求清单、区分优先级</div>
       </div>
-      <div class="team-card" onclick="copyText('@分析梅')">
+      <div class="team-card" onclick="copyText('@分析小梅')">
         <div class="icon-wrapper" style="background: rgba(167, 139, 250, 0.1); border: 1px solid rgba(167, 139, 250, 0.2);">${icons.da}</div>
-        <div class="alias">@分析梅</div>
+        <div class="alias">@分析小梅 @DA @数据</div>
         <div class="name">分析小梅</div>
         <div class="role">数据分析师</div>
         <div class="desc">分析数据、指导需求决策</div>
       </div>
-      <div class="team-card" onclick="copyText('@调研梅')">
+      <div class="team-card" onclick="copyText('@调研小梅')">
         <div class="icon-wrapper" style="background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.2);">${icons.ur}</div>
-        <div class="alias">@调研梅</div>
+        <div class="alias">@调研小梅 @UR @调研</div>
         <div class="name">调研小梅</div>
         <div class="role">市场调研员</div>
         <div class="desc">用户调研、竞品分析</div>
       </div>
-      <div class="team-card" onclick="copyText('@开发梅')">
+      <div class="team-card" onclick="copyText('@开发小梅')">
         <div class="icon-wrapper" style="background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.2);">${icons.dev}</div>
-        <div class="alias">@开发梅</div>
+        <div class="alias">@开发小梅 @DEV @开发</div>
         <div class="name">开发小梅</div>
         <div class="role">开发工程师</div>
         <div class="desc">技术实现、代码落地</div>

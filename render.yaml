@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "services": [
+    {
+      "name": "lobster-dashboard",
+      "type": "web",
+      "runtime": "node",
+      "buildCommand": "npm install",
+      "startCommand": "node server.js",
+      "envVars": [
+        {
+          "key": "AUTH_USER",
+          "value": "admin"
+        },
+        {
+          "key": "AUTH_PASS",
+          "generateValue": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>梅式指挥中心 🦞</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            slate: {
+              850: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans SC', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+      min-height: 100vh;
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+    }
+    .glass-card:hover {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: rgba(148, 163, 184, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 
+                  0 0 20px rgba(56, 189, 248, 0.1);
+    }
+    .lobster-icon {
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.3));
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .sub-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.08);
+    }
+    .sub-card:hover {
+      background: rgba(15, 23, 42, 0.8);
+      border-color: rgba(56, 189, 248, 0.2);
+    }
+  </style>
+</head>
+<body class="text-slate-200">
+  <div id="root"></div>
+  
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    // 龙虾数据
+    const lobsters = {
+      pm: {
+        id: 'pm',
+        name: '产品小梅',
+        alias: '@产品梅',
+        icon: '🦞',
+        role: '产品经理',
+        description: '需求分析、统筹产品方案',
+        color: 'from-cyan-500 to-blue-500',
+        subordinates: [
+          {
+            id: 'solution',
+            name: '方案小小梅',
+            alias: '@方案小小梅',
+            icon: '💡',
+            description: '输出需求解决方案'
+          },
+          {
+            id: 'flow',
+            name: '流程小小梅',
+            alias: '@流程小小梅',
+            icon: '📊',
+            description: '画用户/系统流程图'
+          },
+          {
+            id: 'prd',
+            name: 'PRD小小梅',
+            alias: '@PRD小小梅',
+            icon: '📝',
+            description: '输出开发可识别PRD'
+          }
+        ]
+      },
+      team: [
+        {
+          id: 'rm',
+          name: '管理小梅',
+          alias: '@管理梅',
+          icon: '📋',
+          role: '需求管理员',
+          description: '需求清单、优先级、定期推送',
+          color: 'from-emerald-500 to-teal-500'
+        },
+        {
+          id: 'da',
+          name: '分析小梅',
+          alias: '@分析梅',
+          icon: '📈',
+          role: '数据分析师',
+          description: '数据分析、用户行为、业务指标',
+          color: 'from-violet-500 to-purple-500'
+        },
+        {
+          id: 'ur',
+          name: '调研小梅',
+          alias: '@调研梅',
+          icon: '🔍',
+          role: '市场调研员',
+          description: '用户调研、市场分析、竞品研究',
+          color: 'from-amber-500 to-orange-500'
+        },
+        {
+          id: 'dev',
+          name: '开发小梅',
+          alias: '@开发梅',
+          icon: '💻',
+          role: '开发工程师',
+          description: '技术实现、代码落地、技术评估',
+          color: 'from-rose-500 to-pink-500'
+        }
+      ]
+    };
+
+    // 复制到剪贴板
+    const copyToClipboard = async (text) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        // 降级方案
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          return true;
+        } catch (e) {
+          return false;
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      }
+    };
+
+    // Toast 提示组件
+    const Toast = ({ message, isVisible, onClose }) => {
+      useEffect(() => {
+        if (isVisible) {
+          const timer = setTimeout(onClose, 2000);
+          return () => clearTimeout(timer);
+        }
+      }, [isVisible, onClose]);
+
+      if (!isVisible) return null;
+
+      return (
+        <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 animate-fade-in">
+          <div className="glass-card px-6 py-3 rounded-full flex items-center gap-3 shadow-2xl">
+            <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span className="text-sm font-medium text-slate-200">{message}</span>
+          </div>
+        </div>
+      );
+    };
+
+    // 子卡片组件（小小梅）
+    const SubCard = ({ data, onClick }) => (
+      <button
+        onClick={() => onClick(data.alias)}
+        className="sub-card rounded-xl p-4 text-left transition-all duration-300 hover:scale-105 group"
+      >
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-2xl group-hover:scale-110 transition-transform">{data.icon}</span>
+          <span className="text-xs font-mono text-slate-500">{data.alias}</span>
+        </div>
+        <h4 className="font-semibold text-slate-200 mb-1">{data.name}</h4>
+        <p className="text-xs text-slate-400 leading-relaxed">{data.description}</p>
+      </button>
+    );
+
+    // 主卡片组件
+    const MainCard = ({ data, onClick }) => (
+      <button
+        onClick={() => onClick(data.alias)}
+        className="glass-card rounded-2xl p-6 text-left transition-all duration-300 w-full group"
+      >
+        <div className="flex items-start gap-4 mb-4">
+          <div className="relative">
+            <span className="text-5xl lobster-icon group-hover:scale-110 transition-transform duration-300">{data.icon}</span>
+            <div className={`absolute -inset-2 bg-gradient-to-r ${data.color} opacity-20 blur-xl rounded-full group-hover:opacity-30 transition-opacity`}></div>
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-xs font-mono text-slate-500">{data.alias}</span>
+            </div>
+            <h3 className="text-2xl font-bold gradient-text mb-1">{data.name}</h3>
+            <p className="text-sm text-slate-400">{data.role}</p>
+          </div>
+        </div>
+        <p className="text-slate-300 mb-6 leading-relaxed">{data.description}</p>
+        
+        {/* 子卡片区域 */}
+        <div className="grid grid-cols-3 gap-3">
+          {data.subordinates.map((sub) => (
+            <div key={sub.id} onClick={(e) => { e.stopPropagation(); onClick(sub.alias); }}>
+              <SubCard data={sub} onClick={onClick} />
+            </div>
+          ))}
+        </div>
+      </button>
+    );
+
+    // 团队成员卡片
+    const TeamCard = ({ data, onClick }) => (
+      <button
+        onClick={() => onClick(data.alias)}
+        className="glass-card rounded-2xl p-5 text-left transition-all duration-300 group h-full"
+      >
+        <div className="flex items-start gap-4 mb-3">
+          <div className="relative">
+            <span className="text-4xl lobster-icon group-hover:scale-110 transition-transform duration-300">{data.icon}</span>
+            <div className={`absolute -inset-2 bg-gradient-to-r ${data.color} opacity-20 blur-xl rounded-full group-hover:opacity-30 transition-opacity`}></div>
+          </div>
+          <div>
+            <div className="text-xs font-mono text-slate-500 mb-1">{data.alias}</div>
+            <h3 className="text-lg font-bold text-slate-200">{data.name}</h3>
+          </div>
+        </div>
+        <p className="text-xs text-slate-400 mb-2">{data.role}</p>
+        <p className="text-sm text-slate-300 leading-relaxed">{data.description}</p>
+      </button>
+    );
+
+    // 主应用
+    const App = () => {
+      const [toast, setToast] = useState({ message: '', isVisible: false });
+
+      const handleCardClick = async (alias) => {
+        const success = await copyToClipboard(alias);
+        if (success) {
+          setToast({ message: `已复制 ${alias}，快去粘贴使用吧！`, isVisible: true });
+        } else {
+          setToast({ message: `请手动复制：${alias}`, isVisible: true });
+        }
+      };
+
+      const hideToast = () => {
+        setToast(prev => ({ ...prev, isVisible: false }));
+      };
+
+      return (
+        <div className="min-h-screen p-4 sm:p-6 lg:p-8">
+          {/* Toast */}
+          <Toast message={toast.message} isVisible={toast.isVisible} onClose={hideToast} />
+
+          {/* 头部 */}
+          <header className="max-w-7xl mx-auto mb-8 text-center animate-fade-in">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="text-4xl animate-pulse-slow">🦞</span>
+              <h1 className="text-4xl sm:text-5xl font-bold gradient-text">梅式指挥中心</h1>
+              <span className="text-4xl animate-pulse-slow">🦞</span>
+            </div>
+            <p className="text-slate-400 text-lg">8只专业龙虾，一套完整的产品研发体系</p>
+            <p className="text-slate-500 text-sm mt-2">点击任意卡片即可复制召唤指令</p>
+          </header>
+
+          {/* 主内容区 */}
+          <main className="max-w-7xl mx-auto space-y-6">
+            {/* 产品小梅 - 大卡片 */}
+            <section className="animate-slide-up" style={{animationDelay: '0.1s'}}>
+              <MainCard data={lobsters.pm} onClick={handleCardClick} />
+            </section>
+
+            {/* 团队成员 - 4列网格 */}
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-slide-up" style={{animationDelay: '0.2s'}}>
+              {lobsters.team.map((member) => (
+                <TeamCard key={member.id} data={member} onClick={handleCardClick} />
+              ))}
+            </section>
+          </main>
+
+          {/* 底部 */}
+          <footer className="max-w-7xl mx-auto mt-12 text-center text-slate-600 text-sm">
+            <p>梅式指挥中心 · 让产品研发更高效 🌸</p>
+          </footer>
+        </div>
+      );
+    };
+
+    // 渲染
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

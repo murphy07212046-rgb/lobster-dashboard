@@ -46,9 +46,10 @@ app.get('/', (req, res) => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      padding: 30px 40px;
-      gap: 24px;
+      justify-content: flex-start;
+      padding: 24px 40px 16px;
+      gap: 20px;
+      overflow-y: auto;
     }
     .header {
       text-align: center;
@@ -82,12 +83,11 @@ app.get('/', (req, res) => {
       backdrop-filter: blur(20px);
       border: 1px solid rgba(148, 163, 184, 0.15);
       border-radius: 20px;
-      padding: 40px 48px;
+      padding: 32px 48px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      flex-shrink: 1;
-      flex-grow: 1;
+      flex-shrink: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -140,14 +140,14 @@ app.get('/', (req, res) => {
     .sub-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 20px;
+      gap: 16px;
+      margin-top: 16px;
     }
     .sub-card {
       background: rgba(15, 23, 42, 0.5);
       border: 1px solid rgba(148, 163, 184, 0.1);
       border-radius: 16px;
-      padding: 28px 20px;
+      padding: 20px 16px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -190,16 +190,15 @@ app.get('/', (req, res) => {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      flex-shrink: 1;
-      flex-grow: 1;
+      gap: 16px;
+      flex-shrink: 0;
     }
     .team-card {
       background: rgba(30, 41, 59, 0.5);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(148, 163, 184, 0.1);
       border-radius: 16px;
-      padding: 32px 24px;
+      padding: 24px 20px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -251,10 +250,10 @@ app.get('/', (req, res) => {
 
     .footer {
       font-size: 14px;
-      color: #475569;
+      color: #64748b;
       text-align: center;
       flex-shrink: 0;
-      margin-top: 10px;
+      padding: 8px 0;
     }
     .toast {
       position: fixed;

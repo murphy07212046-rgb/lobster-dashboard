@@ -47,8 +47,8 @@ app.get('/', (req, res) => {
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding-top: 10px;
-      gap: 6px;
+      padding-top: 8px;
+      gap: 4px;
     }
     .header {
       text-align: center;
@@ -132,20 +132,20 @@ app.get('/', (req, res) => {
     .main-card .desc {
       font-size: 13px;
       color: #cbd5e1;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
 
     /* 子卡片 */
     .sub-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      gap: 6px;
     }
     .sub-card {
       background: rgba(15, 23, 42, 0.5);
       border: 1px solid rgba(148, 163, 184, 0.1);
       border-radius: 12px;
-      padding: 14px 12px;
+      padding: 10px 8px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -188,7 +188,7 @@ app.get('/', (req, res) => {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+      gap: 4px;
       flex-shrink: 0;
     }
     .team-card {
@@ -196,7 +196,7 @@ app.get('/', (req, res) => {
       backdrop-filter: blur(20px);
       border: 1px solid rgba(148, 163, 184, 0.1);
       border-radius: 14px;
-      padding: 16px 12px;
+      padding: 10px 8px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
@@ -248,7 +248,7 @@ app.get('/', (req, res) => {
       color: #475569;
       text-align: center;
       flex-shrink: 0;
-      margin-top: 2px;
+      margin-top: 0;
     }
     .toast {
       position: fixed;

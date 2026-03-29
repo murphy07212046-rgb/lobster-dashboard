@@ -46,30 +46,31 @@ app.get('/', (req, res) => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      justify-content: center;
+      gap: 8px;
     }
     .header {
       text-align: center;
       flex-shrink: 0;
+      margin-bottom: 4px;
     }
     .header h1 {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
       background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       letter-spacing: 2px;
     }
     .header p {
-      font-size: 13px;
+      font-size: 12px;
       color: #94a3b8;
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
     .header .hint {
-      font-size: 11px;
+      font-size: 10px;
       color: #64748b;
     }
 
@@ -80,11 +81,12 @@ app.get('/', (req, res) => {
       backdrop-filter: blur(20px);
       border: 1px solid rgba(148, 163, 184, 0.15);
       border-radius: 16px;
-      padding: 20px 28px;
+      padding: 16px 24px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
       flex-shrink: 0;
+      margin: 4px 0;
     }
     .main-card:hover {
       background: rgba(30, 41, 59, 0.75);
@@ -186,8 +188,9 @@ app.get('/', (req, res) => {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 8px;
       flex-shrink: 0;
+      margin: 4px 0;
     }
     .team-card {
       background: rgba(30, 41, 59, 0.5);
@@ -242,10 +245,11 @@ app.get('/', (req, res) => {
     }
 
     .footer {
-      font-size: 11px;
+      font-size: 10px;
       color: #475569;
       text-align: center;
       flex-shrink: 0;
+      margin-top: 4px;
     }
     .toast {
       position: fixed;

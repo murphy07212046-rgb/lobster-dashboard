@@ -2,12 +2,17 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 const AUTH_USER = process.env.AUTH_USER || 'admin';
 const AUTH_PASS = process.env.AUTH_PASS || 'lobster2024';
 
 // 基础HTTP鉴权中间件
 const basicAuth = (req, res, next) => {
+  // 健康检查不鉴权
+  if (req.path === '/health') {
+    return next();
+  }
+  
   const auth = req.headers.authorization;
   
   if (!auth) {
@@ -27,6 +32,11 @@ const basicAuth = (req, res, next) => {
   }
 };
 
+// 健康检查端点
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 // 应用鉴权
 app.use(basicAuth);
 
@@ -38,7 +48,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`🦞 梅式指挥中心已启动: http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🦞 梅式指挥中心已启动: http://0.0.0.0:${PORT}`);
   console.log(`登录账号: ${AUTH_USER}`);
 });

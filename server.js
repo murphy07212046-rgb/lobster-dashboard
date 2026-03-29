@@ -31,44 +31,48 @@ app.get('/', (req, res) => {
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
+    html, body { 
       font-family: "Microsoft YaHei", "微软雅黑", sans-serif; 
       background: linear-gradient(135deg, #0a0f1a 0%, #0f172a 50%, #1a0f2e 100%); 
-      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
+    }
+    body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
+      justify-content: center;
+      padding: 20px;
     }
     .container {
       width: 100%;
-      max-width: 1400px;
+      max-width: 1200px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 32px;
+      gap: 20px;
     }
     .header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
     }
     .header h1 {
-      font-size: 42px;
+      font-size: 32px;
       font-weight: 700;
       background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 12px;
+      margin-bottom: 6px;
       letter-spacing: 2px;
     }
     .header p {
-      font-size: 16px;
+      font-size: 14px;
       color: #94a3b8;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
     .header .hint {
-      font-size: 14px;
+      font-size: 12px;
       color: #64748b;
     }
     .main-card {
@@ -76,169 +80,164 @@ app.get('/', (req, res) => {
       background: rgba(30, 41, 59, 0.6);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(148, 163, 184, 0.15);
-      border-radius: 24px;
-      padding: 48px;
+      border-radius: 20px;
+      padding: 24px 32px;
       transition: all 0.4s ease;
     }
     .main-card:hover {
       background: rgba(30, 41, 59, 0.75);
       border-color: rgba(148, 163, 184, 0.25);
-      transform: translateY(-6px);
-      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6), 0 0 40px rgba(96, 165, 250, 0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 30px rgba(96, 165, 250, 0.1);
     }
     .card-header {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 24px;
-      margin-bottom: 24px;
+      gap: 12px;
+      margin-bottom: 12px;
+      text-align: center;
     }
     .icon-wrapper {
-      width: 80px;
-      height: 80px;
+      width: 56px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
       background: rgba(56, 189, 248, 0.1);
-      border-radius: 20px;
+      border-radius: 16px;
       border: 1px solid rgba(56, 189, 248, 0.2);
     }
     .icon-wrapper svg {
-      width: 44px;
-      height: 44px;
-    }
-    .card-title-area {
-      flex: 1;
+      width: 32px;
+      height: 32px;
     }
     .card-alias {
-      font-size: 14px;
+      font-size: 12px;
       color: #64748b;
       font-family: monospace;
-      margin-bottom: 6px;
     }
     .card-name {
-      font-size: 32px;
+      font-size: 24px;
       font-weight: 700;
       background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 8px;
     }
     .card-role {
-      font-size: 16px;
+      font-size: 14px;
       color: #94a3b8;
     }
     .card-desc {
-      font-size: 16px;
+      font-size: 14px;
       color: #cbd5e1;
-      line-height: 1.6;
-      margin-bottom: 32px;
-      padding-left: 104px;
+      text-align: center;
+      margin-bottom: 16px;
     }
     .sub-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      padding-left: 104px;
+      gap: 16px;
     }
     .sub-card {
       background: rgba(15, 23, 42, 0.5);
       border: 1px solid rgba(148, 163, 184, 0.1);
-      border-radius: 16px;
-      padding: 28px;
-      text-align: left;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
     }
     .sub-card:hover {
       background: rgba(15, 23, 42, 0.7);
       border-color: rgba(148, 163, 184, 0.2);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
     .sub-card .icon-wrapper {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      margin-bottom: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      margin: 0 auto 10px;
     }
     .sub-card .icon-wrapper svg {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
     }
     .sub-card .alias {
-      font-size: 13px;
+      font-size: 11px;
       color: #64748b;
       font-family: monospace;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .sub-card .name {
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
       color: #e2e8f0;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
     }
     .sub-card .desc {
-      font-size: 14px;
+      font-size: 12px;
       color: #94a3b8;
-      line-height: 1.5;
+      line-height: 1.4;
     }
     .team-grid {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      gap: 16px;
     }
     .team-card {
       background: rgba(30, 41, 59, 0.5);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(148, 163, 184, 0.1);
-      border-radius: 20px;
-      padding: 32px;
+      border-radius: 16px;
+      padding: 20px;
       cursor: pointer;
       transition: all 0.3s ease;
-      text-align: left;
+      text-align: center;
     }
     .team-card:hover {
       background: rgba(30, 41, 59, 0.7);
       border-color: rgba(148, 163, 184, 0.2);
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.4);
     }
     .team-card .icon-wrapper {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      margin-bottom: 20px;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      margin: 0 auto 12px;
     }
     .team-card .icon-wrapper svg {
-      width: 36px;
-      height: 36px;
+      width: 28px;
+      height: 28px;
     }
     .team-card .alias {
-      font-size: 13px;
+      font-size: 11px;
       color: #64748b;
       font-family: monospace;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .team-card .name {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 600;
       color: #e2e8f0;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
     .team-card .role {
-      font-size: 14px;
+      font-size: 12px;
       color: #818cf8;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
     .team-card .desc {
-      font-size: 14px;
+      font-size: 12px;
       color: #94a3b8;
-      line-height: 1.6;
+      line-height: 1.5;
     }
     .footer {
-      margin-top: 40px;
-      font-size: 14px;
+      margin-top: 16px;
+      font-size: 12px;
       color: #475569;
     }
     .toast {
@@ -292,11 +291,9 @@ app.get('/', (req, res) => {
     <div class="main-card" onclick="copyText('@产品梅')">
       <div class="card-header">
         <div class="icon-wrapper">${icons.pm}</div>
-        <div class="card-title-area">
-          <div class="card-alias">@产品梅</div>
-          <div class="card-name">产品小梅</div>
-          <div class="card-role">产品经理</div>
-        </div>
+        <div class="card-alias">@产品梅</div>
+        <div class="card-name">产品小梅</div>
+        <div class="card-role">产品经理</div>
       </div>
       <div class="card-desc">需求分析、统筹产品方案，带领助手团完成从需求到PRD的完整流程</div>
       <div class="sub-cards">

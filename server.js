@@ -46,8 +46,9 @@ app.get('/', (req, res) => {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
+      justify-content: flex-start;
+      padding-top: 10px;
+      gap: 6px;
     }
     .header {
       text-align: center;
@@ -81,12 +82,11 @@ app.get('/', (req, res) => {
       backdrop-filter: blur(20px);
       border: 1px solid rgba(148, 163, 184, 0.15);
       border-radius: 16px;
-      padding: 16px 24px;
+      padding: 12px 20px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s ease;
       flex-shrink: 0;
-      margin: 4px 0;
     }
     .main-card:hover {
       background: rgba(30, 41, 59, 0.75);
@@ -188,9 +188,8 @@ app.get('/', (req, res) => {
       width: 100%;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      gap: 6px;
       flex-shrink: 0;
-      margin: 4px 0;
     }
     .team-card {
       background: rgba(30, 41, 59, 0.5);
@@ -249,7 +248,7 @@ app.get('/', (req, res) => {
       color: #475569;
       text-align: center;
       flex-shrink: 0;
-      margin-top: 4px;
+      margin-top: 2px;
     }
     .toast {
       position: fixed;

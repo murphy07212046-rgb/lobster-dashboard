@@ -127,7 +127,7 @@ app.get('/', (req, res) => {
     }
     .main-card .role {
       font-size: 18px;
-      color: #94a3b8;
+      color: #818cf8;
       margin-bottom: 12px;
     }
     .main-card .desc {
